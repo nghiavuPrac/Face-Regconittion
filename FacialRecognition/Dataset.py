@@ -19,7 +19,7 @@ cam = cv2.VideoCapture(0)
 cam.set(3, 1080) # set video width
 cam.set(4, 720) # set video height
 
-face_detector = cv2.CascadeClassifier('E:\Project Face regconition\OpenCV-Face-Recognition\FacialRecognition\haarcascade_frontalface_default.xml')
+face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # For each person, enter one numeric face id
 def loadId_from_file(pathName):
@@ -48,7 +48,7 @@ while(True):
         count += 1
 
         # Save the captured image into the datasets folder
-        cv2.imwrite("E:\Project Face regconition\OpenCV-Face-Recognition\FacialRecognition\dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
 
         cv2.imshow('image', img)
 

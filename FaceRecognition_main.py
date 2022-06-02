@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
 
     def runFaceRecogintion(self):
         try:
-            exec(open("E:\Project Face regconition\OpenCV-Face-Recognition\FacialRecognition\Recognition.py").read())
+            exec(open("FacialRecognition\Recognition.py").read())
         except:
             self.warning_message("Chưa có dữ liệu.")
 

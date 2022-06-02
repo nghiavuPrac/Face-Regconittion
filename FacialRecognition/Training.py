@@ -16,10 +16,10 @@ from PIL import Image
 import os
 
 # Path for face image database
-data_path = "E:\Project Face regconition\OpenCV-Face-Recognition\FacialRecognition\dataset"
+data_path = "dataset"
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-detector = cv2.CascadeClassifier("E:\Project Face regconition\OpenCV-Face-Recognition\FacialRecognition\haarcascade_frontalface_default.xml")
+detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
 # function to get the images and label data
 def getImagesAndLabels(path,detector):
