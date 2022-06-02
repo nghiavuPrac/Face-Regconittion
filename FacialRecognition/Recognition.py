@@ -16,8 +16,8 @@ pathName = "listOfUser.txt"
 
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('Trainer\Trainer.yml')
-cascadePath = "haarcascade_frontalface_default.xml"
+recognizer.read('FacialRecognition\Trainer\Trainer.yml')
+cascadePath = "FacialRecognition\haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath)
 
 font = cv2.FONT_HERSHEY_SIMPLEX

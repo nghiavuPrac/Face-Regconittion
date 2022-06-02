@@ -19,7 +19,7 @@ cam = cv2.VideoCapture(0)
 cam.set(3, 1080) # set video width
 cam.set(4, 720) # set video height
 
-face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_detector = cv2.CascadeClassifier('FacialRecognition\haarcascade_frontalface_default.xml')
 
 # For each person, enter one numeric face id
 def loadId_from_file(pathName):
