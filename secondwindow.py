@@ -77,10 +77,12 @@ class Ui_SecondWindow(object):
         imsg.exec_()
 
     def collect_data(self):
-        exec(open("Face-Regconittion\FacialRecognition\Dataset.py").read())
+        #need direct file path
+        exec(open("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Dataset.py").read())
     
     def train_model(self):
-        exec(open("Face-Regconittion\FacialRecognition\Training.pyy").read())
+        #need direct file path
+        exec(open("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Training.py").read())
         
 
     def setupUi(self, SecondWindow):

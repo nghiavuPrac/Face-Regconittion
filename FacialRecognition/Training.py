@@ -47,7 +47,8 @@ faces,ids = getImagesAndLabels(data_path,detector)
 recognizer.train(faces, np.array(ids))
 
 # Save the model into trainer/trainer.yml
-recognizer.write("FacialRecognition\Trainer\Trainer.yml") # recognizer.save() worked on Mac, but not on Pi
+# need direct link path
+recognizer.write("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Trainer\Trainer.yml") # recognizer.save() worked on Mac, but not on Pi
 
 # Print the numer of faces trained and end program
 print("\n [INFO] {0} faces trained. Exiting Program".format(len(np.unique(ids))))

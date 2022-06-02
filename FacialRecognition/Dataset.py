@@ -48,7 +48,8 @@ while(True):
         count += 1
 
         # Save the captured image into the datasets folder
-        cv2.imwrite("Face-Regconittion\FacialRecognition\dataset\User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        # need direct link path
+        cv2.imwrite("E:\Project Face regconition\Face-Regconittion\FacialRecognition\dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
 
         cv2.imshow('image', img)
 

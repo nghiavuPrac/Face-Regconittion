@@ -16,7 +16,7 @@ pathName = "listOfUser.txt"
 
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('FacialRecognition\Trainer\Trainer.yml')
+recognizer.read('E:\Project Face regconition\Face-Regconittion\FacialRecognition\Trainer\Trainer.yml')
 cascadePath = "FacialRecognition\haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath)
 
