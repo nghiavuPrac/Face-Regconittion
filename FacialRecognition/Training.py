@@ -16,10 +16,10 @@ from PIL import Image
 import os
 
 # Path for face image database
-data_path = "FacialRecognition\dataset"
+data_path = "Face-Regconittion\FacialRecognition\dataset"
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-detector = cv2.CascadeClassifier("FacialRecognition\haarcascade_frontalface_default.xml")
+detector = cv2.CascadeClassifier("Face-Regconittion\FacialRecognition\haarcascade_frontalface_default.xml")
 
 # function to get the images and label data
 def getImagesAndLabels(path,detector):
@@ -48,7 +48,7 @@ recognizer.train(faces, np.array(ids))
 
 # Save the model into trainer/trainer.yml
 # need direct link path
-recognizer.write("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Trainer\Trainer.yml") # recognizer.save() worked on Mac, but not on Pi
+recognizer.write("FacialRecognition\Trainer\Trainer.yml") # recognizer.save() worked on Mac, but not on Pi
 
 # Print the numer of faces trained and end program
 print("\n [INFO] {0} faces trained. Exiting Program".format(len(np.unique(ids))))

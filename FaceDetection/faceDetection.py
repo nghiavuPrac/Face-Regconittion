@@ -7,14 +7,17 @@ Adapted by Marcelo Rovai - MJRoBot.org @ 7Feb2018
 
 import numpy as np
 import cv2
+import time
 
 # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
 faceCascade = cv2.CascadeClassifier('e:\Project Face regconition\OpenCV-Face-Recognition\FaceDetection\Cascades\haarcascade_frontalface_default.xml')
 
+start = time.time()
 cap = cv2.VideoCapture(0)
 cap.set(3,640) # set Width
 cap.set(4,480) # set Height
-
+end = time.time()
+print("The time of execution of above program is :", end-start)
 while True:
     ret, img = cap.read()
     img = cv2.flip(img, 1)
@@ -23,7 +26,7 @@ while True:
         gray,
         scaleFactor=1.2,
         minNeighbors=5,     
-        minSize=(20, 20)
+        minSize=(100, 100)
     )
 
     for (x,y,w,h) in faces:

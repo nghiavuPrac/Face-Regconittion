@@ -12,12 +12,12 @@ import cv2
 import numpy as np
 import os 
 
-pathName = "listOfUser.txt"
+pathName = "Face-Regconittion\listOfUser.txt"
 
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('E:\Project Face regconition\Face-Regconittion\FacialRecognition\Trainer\Trainer.yml')
-cascadePath = "FacialRecognition\haarcascade_frontalface_default.xml"
+recognizer.read('Face-Regconittion\FacialRecognition\Trainer\Trainer.yml')
+cascadePath = "Face-Regconittion\FacialRecognition\haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -38,8 +38,7 @@ cam.set(3, 1080) # set video widht
 cam.set(4, 720) # set video height
 
 # Define min window size to be recognized as a face
-minW = 0.1*cam.get(3)
-minH = 0.1*cam.get(4)
+
 
 while True:
 
@@ -52,8 +51,7 @@ while True:
         gray,
         scaleFactor = 1.2,
         minNeighbors = 5,
-        minSize = (int(minW), int(minH)),
-       )
+    )
 
     for(x,y,w,h) in faces:
 
@@ -62,7 +60,7 @@ while True:
         id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
         # Check if confidence is less them 65 ==> "0" is perfect match 
-        if (confidence < 65):
+        if (confidence < 100):
             id = names[str(id)]
             confidence = "  {0}%".format(round(100 - confidence))
         else:
@@ -72,10 +70,10 @@ while True:
         cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
         cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)  
     
-    cv2.imshow('camera',img) 
+    cv2.imshow('camera',img)
 
     k = cv2.waitKey(10) & 0xff # Press 'ESC' for exiting video
-    if k == 27:
+    if k==27:
         break
 
 # Do a bit of cleanup

@@ -14,17 +14,32 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import os.path
+import os
 from PIL import Image
 import numpy as np
 import cv2
 
 
 class Ui_SecondWindow(object):
-    pathName = "listOfUser.txt"
+    pathName = "Face-Regconittion\listOfUser.txt"
     #Check Valid(co 3 truong hop):
     #1:File khong ton tai
     #2:Trung id
     #3:Chua co ten
+    def remove_unused(self):
+        pathName="Face-Regconittion\listOfUser.txt"
+        tempName= "Face-Regconittion\Temp.txt"
+        with open(pathName,'r') as reader:
+            with open(tempName,'w') as writer:    
+                for line in reader:
+                    info = line.rstrip().split(",")
+                    fileName = "Face-Regconittion\\FacialRecognition\\dataset\\User."+ str(info[0]) +".1.jpg"
+                    if(os.path.exists(fileName)):#write back to file if id have picture
+                        writer.write(line)
+        os.replace("Face-Regconittion\Temp.txt", "Face-Regconittion\listOfUser.txt")
+        
+
+
     def check_valid(self,id):
         checkId = []
         with open(self.pathName) as reader:
@@ -44,6 +59,8 @@ class Ui_SecondWindow(object):
             self.warning_message("chua nhap ten kia!")
             return 1
         if(os.path.exists(self.pathName)):
+            #remove false user id
+            self.remove_unused()
             check = self.check_valid(id)
             if(check == True):
                 with open(self.pathName,'a') as writer:
@@ -78,11 +95,11 @@ class Ui_SecondWindow(object):
 
     def collect_data(self):
         #need direct file path
-        exec(open("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Dataset.py").read())
+        exec(open("Face-Regconittion\FacialRecognition\Dataset.py").read())
     
     def train_model(self):
         #need direct file path
-        exec(open("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Training.py").read())
+        exec(open("Face-Regconittion\FacialRecognition\Training.py").read())
         
 
     def setupUi(self, SecondWindow):
