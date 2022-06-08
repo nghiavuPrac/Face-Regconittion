@@ -12,6 +12,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 from secondwindow import Ui_SecondWindow
+import os
+import cv2
 
 class Ui_MainWindow(object):
     def openWindow(self):
@@ -29,9 +31,10 @@ class Ui_MainWindow(object):
         msg.exec_() 
 
     def runFaceRecogintion(self):
+        import sys
         try:
             #need direct file path
-            exec(open("E:\Project Face regconition\Face-Regconittion\FacialRecognition\Recognition.py").read())
+            sys.exit(exec(open("Face-Regconittion\FacialRecognition\Recognition.py").read()))
         except:
             self.warning_message("Chưa có dữ liệu.")
 

@@ -19,27 +19,24 @@ from PIL import Image
 import numpy as np
 import cv2
 
-
 class Ui_SecondWindow(object):
-    pathName = "Face-Regconittion\listOfUser.txt"
+    pathName = os.getcwd()+"\Face-Regconittion\listOfUser.txt"
+    def remove_unused(self):
+        tempName= os.getcwd()+"\Face-Regconittion\Temp.txt"
+        with open(self.pathName,'r') as reader:
+            with open(tempName,'w') as writer:    
+                for line in reader:
+                    info = line.rstrip().split(",")
+                    fileName = os.getcwd()+ "\\Face-Regconittion\\FacialRecognition\\dataset\\User." + str(info[0]) +".1.jpg"
+                    if(os.path.exists(fileName)):#write back to file if id have picture
+                        writer.write(line)
+        os.replace(tempName, self.pathName)
+        
+
     #Check Valid(co 3 truong hop):
     #1:File khong ton tai
     #2:Trung id
     #3:Chua co ten
-    def remove_unused(self):
-        pathName="Face-Regconittion\listOfUser.txt"
-        tempName= "Face-Regconittion\Temp.txt"
-        with open(pathName,'r') as reader:
-            with open(tempName,'w') as writer:    
-                for line in reader:
-                    info = line.rstrip().split(",")
-                    fileName = "Face-Regconittion\\FacialRecognition\\dataset\\User."+ str(info[0]) +".1.jpg"
-                    if(os.path.exists(fileName)):#write back to file if id have picture
-                        writer.write(line)
-        os.replace("Face-Regconittion\Temp.txt", "Face-Regconittion\listOfUser.txt")
-        
-
-
     def check_valid(self,id):
         checkId = []
         with open(self.pathName) as reader:
@@ -76,6 +73,7 @@ class Ui_SecondWindow(object):
         self.infrom_message("Data collect succefully!\nClick 'ok' to start training")
         self.train_model()
         self.infrom_message("Training succefully!")
+        sys.exit()
         
     def warning_message(self,message):
         msg = QMessageBox()
@@ -95,7 +93,7 @@ class Ui_SecondWindow(object):
 
     def collect_data(self):
         #need direct file path
-        exec(open("Face-Regconittion\FacialRecognition\Dataset.py").read())
+        exec(open(os.getcwd() + "\Face-Regconittion\FacialRecognition\Dataset.py").read())
     
     def train_model(self):
         #need direct file path
@@ -111,8 +109,6 @@ class Ui_SecondWindow(object):
         self.boxbutton.setOrientation(QtCore.Qt.Horizontal)
         self.boxbutton.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.boxbutton.setObjectName("boxbutton")
-
-        self.boxbutton.clicked.connect(self.take_input)
 
         self.spinBox = QtWidgets.QSpinBox(SecondWindow)
         self.spinBox.setGeometry(QtCore.QRect(120, 130, 42, 22))
@@ -146,7 +142,7 @@ class Ui_SecondWindow(object):
         self.label_2.setObjectName("label_2")
 
         self.retranslateUi(SecondWindow)
-        self.boxbutton.accepted.connect(SecondWindow.accept)
+        self.boxbutton.accepted.connect(lambda: self.take_input())
         self.boxbutton.rejected.connect(SecondWindow.reject)
         QtCore.QMetaObject.connectSlotsByName(SecondWindow)
 
@@ -170,3 +166,5 @@ if __name__ == "__main__":
     ui.setupUi(SecondWindow)
     SecondWindow.show()
     sys.exit(app.exec_())
+    
+    

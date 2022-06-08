@@ -10,4 +10,4 @@ with open(pathName,'r') as reader:
             if(os.path.exists(fileName)):#write back to file if id have picture
                 writer.write(line)
 
-os.replace("Face-Regconittion\Temp.txt", "Face-Regconittion\listOfUser.txt")
+os.replace(tempName,pathName)

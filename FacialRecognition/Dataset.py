@@ -16,8 +16,8 @@ import os
 pathName = "Face-Regconittion\listOfUser.txt"
 
 cam = cv2.VideoCapture(0)
-cam.set(3, 1080) # set video width
-cam.set(4, 720) # set video height
+cam.set(3, 640) # set video width
+cam.set(4, 480) # set video height
 
 face_detector = cv2.CascadeClassifier('Face-Regconittion\FacialRecognition\haarcascade_frontalface_default.xml')
 
