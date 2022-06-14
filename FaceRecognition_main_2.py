@@ -24,10 +24,14 @@ class Ui_MainWindow(object):
         self.window.show()
     
     def open_RemoveWindow(self):
-        self.window = QtWidgets.QDialog()
-        self.ui = Ui_removeWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        try:
+            self.window = QtWidgets.QDialog()
+            self.ui = Ui_removeWindow()
+            self.ui.setupUi(self.window)
+            self.window.show()
+        except:
+            self.warning_message("Chưa có dữ liệu.")
+            
    
     
     def warning_message(self,message):

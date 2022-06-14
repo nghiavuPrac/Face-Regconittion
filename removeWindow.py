@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+import sys
 import os
 from PIL import Image
 import numpy as np
@@ -19,6 +20,7 @@ from nbformat import write
 
 class Ui_removeWindow(object):
     pathName ="Face-Regconittion\listOfUser.txt"
+
     def item_clicked(self):
         clicked = self.listWidget.selectedItems()
         items = []
@@ -32,6 +34,8 @@ class Ui_removeWindow(object):
                 temp = line.strip()
                 item = QtWidgets.QListWidgetItem(temp)
                 self.listWidget.addItem(item)
+        self.listWidget.sortItems()
+
     def remove_OnListFile(self,items):
         tempFile = "Face-Regconittion\Temp.txt"
         with open(self.pathName,'r') as reader:
@@ -66,13 +70,21 @@ class Ui_removeWindow(object):
         items = []
         for i in range(len(clicked)):
             items.append(str(self.listWidget.selectedItems()[i].text()))
+        if (len(items)) > 0:
+            self.remove_OnListFile(items)
+            self.remove_onDataSet(items)
+            self.infrom_message("Data was remove successfully!\n Click 'ok' to start retrain model")
+            self.train_model()
+            self.infrom_message("Retraining succefully!")    
+        else:
+            self.infrom_message("You didn't select any!")
+        self.close() #close window when data was removed aviod error
+        
+    def close(self):
+        for window in QtWidgets.QApplication.topLevelWindows():
+            pass
+        window.close()
 
-        self.remove_OnListFile(items)
-        self.remove_onDataSet(items)
-        self.infrom_message("Data was remove successfully!\n Click 'ok' to start retrain model")
-        self.train_model()
-        self.infrom_message("Retraining succefully!")
-        sys.exit()
 
     def setupUi(self, removeWindow):
         removeWindow.setObjectName("removeWindow")
@@ -132,7 +144,6 @@ class Ui_removeWindow(object):
 
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     removeWindow = QtWidgets.QDialog()
     ui = Ui_removeWindow()

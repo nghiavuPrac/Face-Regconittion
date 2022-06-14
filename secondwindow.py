@@ -21,6 +21,7 @@ import cv2
 
 class Ui_SecondWindow(object):
     pathName = os.getcwd()+"\Face-Regconittion\listOfUser.txt"
+
     def remove_unused(self):
         tempName= os.getcwd()+"\Face-Regconittion\Temp.txt"
         with open(self.pathName,'r') as reader:
@@ -73,7 +74,12 @@ class Ui_SecondWindow(object):
         self.infrom_message("Data collect succefully!\nClick 'ok' to start training")
         self.train_model()
         self.infrom_message("Training succefully!")
-        sys.exit()
+        self.close() #close window when data was removed aviod error
+        
+    def close(self):
+        for window in QtWidgets.QApplication.topLevelWindows():
+            pass
+        window.close()
         
     def warning_message(self,message):
         msg = QMessageBox()
