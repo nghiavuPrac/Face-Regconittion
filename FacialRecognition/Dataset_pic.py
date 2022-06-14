@@ -13,8 +13,8 @@ import cv2
 import os
 
 #path name for list of user
-pathName = "Face-Regconittion\listOfUser.txt"
-
+listOfUser_path = "Face-Regconittion\listOfUser.txt"
+listNameOfImage_path ="Face-Regconittion\listOfPic.txt"
 
 
 face_detector = cv2.CascadeClassifier('Face-Regconittion\FacialRecognition\haarcascade_frontalface_default.xml')
@@ -26,18 +26,21 @@ def loadId_from_file(pathName):
             pass
         face_id= line.split(",")[0]
     return face_id
-face_id = loadId_from_file(pathName)
+face_id = loadId_from_file(listOfUser_path)
 
 #load file Pic_name
-def load_ChoosedPic(fileName = "listOfPic.txt"):
+def load_ChoosedPic(fileName):
     try:
-        with open(pathName,'r') as fileName:
-            listOfPic = [(line.strip()).split() for line in fileName]
+        listOfPic = list()
+        with open(fileName,'r') as reader:
+            for line in reader:
+                listOfPic.append(line.rstrip())
         return listOfPic
     except:
-        raise("File name wasn't found!")
+        print("File name wasn't found!")
 
-list_Pic = load_ChoosedPic() 
+list_Pic = load_ChoosedPic(listNameOfImage_path) 
+
         
 
 # Initialize individual sampling face count
@@ -47,6 +50,7 @@ while(True):
     pic_name = list_Pic[count]
     img = cv2.imread(pic_name,cv2.IMREAD_COLOR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
     faces = face_detector.detectMultiScale(
         gray,
         scaleFactor=1.2,

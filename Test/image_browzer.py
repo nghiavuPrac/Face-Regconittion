@@ -34,20 +34,18 @@ class Window(QWidget):
         self.label = QLabel("Hello")
         vbox.addWidget(self.label)
 
-        
-
-
         self.setLayout(vbox)
 
         self.show()
 
     def getImage(self):
         fname = QFileDialog.getOpenFileNames(self, 'Open file',"E:\Project Face regconition\Face-Regconittion\FacialRecognition\extra_source","All Files (*);;Jpg Files (*.jpg);; PNG Files (*.png)")
-        print(fname)
-        imagePath = fname[0]
-        pixmap = QPixmap(imagePath)
-        self.label.setPixmap(QPixmap(pixmap))
-        self.resize(pixmap.width(), pixmap.height())
+        print(fname[0])
+        quit()
+        #imagePath = fname[0]
+        #pixmap = QPixmap(imagePath)
+        #self.label.setPixmap(QPixmap(pixmap))
+        #self.resize(pixmap.width(), pixmap.height())
 
 
 
