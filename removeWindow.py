@@ -28,6 +28,7 @@ class Ui_removeWindow(object):
         for i in range(len(clicked)):
             items.append(str(self.listWidget.selectedItems()[i].text()))
         self.label.setText("Click 'ok' to remove: "+ str(items))
+        return items
     
     def load_items_from_file(self):
         with open(self.pathName) as reader:
@@ -48,13 +49,14 @@ class Ui_removeWindow(object):
         os.replace(tempFile, self.pathName)
 
     def remove_onDataSet(self,items):
-        try:
-            for item in items:
+        for item in items:
+            try:
                 for i in range(30):
                     pictureName =os.getcwd()+"\\Face-Regconittion\\FacialRecognition\\dataset\\User." + str(item[0]) +"."+ str(i+1) +".jpg"
                     os.remove(pictureName)
-        except:
-            self.warning_message("FileNotFoundError: "+ pictureName)
+                self.infrom_message(str(i+1)+" samples of ['"+str(item) + "'] was removed!")
+            except:
+                self.infrom_message(str(i+1)+" samples of ['"+str(item) + "'] was removed!")
 
 
     def infrom_message(self,message):
@@ -79,19 +81,17 @@ class Ui_removeWindow(object):
 
 
     def remove_it(self):
-        clicked = self.listWidget.selectedItems()
-        items = []
-        for i in range(len(clicked)):
-            items.append(str(self.listWidget.selectedItems()[i].text()))
+        items = self.item_clicked()
         if (len(items)) > 0:
             self.remove_OnListFile(items)
             self.remove_onDataSet(items)
             self.infrom_message("Data was remove successfully!\n Click 'ok' to start retrain model")
             self.train_model()
-            self.infrom_message("Retraining succefully!")    
+            self.infrom_message("Retraining succefully!")
+            self.close() #close window when data was removed aviod error   
         else:
             self.infrom_message("You didn't select any!")
-        self.close() #close window when data was removed aviod error
+         
         
     def close(self):
         for window in QtWidgets.QApplication.topLevelWindows():

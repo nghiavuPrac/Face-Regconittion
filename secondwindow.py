@@ -47,36 +47,34 @@ class Ui_SecondWindow(object):
                 checkId.append(info[0])
                 checkName.append(info[1].lower())
         if(id in checkId and name.lower() in checkName):
-            return 3
+            self.warning_message("Tai khoan da duoc dang ky!\n Nhan nut 'Remove user' va quay lai de cap nhat tai khoan")
+            return False
         elif(id in checkId):
-            return 2
+            self.warning_message("Trùng id rồi kìa!\n Những id đã bị chiếm: " + str(checkId))
+            return False
         else:
-            return 1
+            return True
 
         
-    def train(self):
+    def take_input(self):
         #input
         id = self.spinBox.text()
         name = self.lineEdit.text()
         userinfo = id +","+name
+
         #3:Chua co ten
         if(len(name)==0):
             self.warning_message("chua nhap ten kia!")
             return 1
         
-        
         if(os.path.exists(self.pathName)):
             #remove false user id
             self.remove_unused()
-            check = self.check_valid(id,name)
-            if(check == 3):
-                self.warning_message("Tai khoan da duoc dang ky!\n Nhan nut 'Remove user' va quay lai de cap nhat tai khoan")     
-            elif(check == 2):
+            if(self.check_valid(id,name)):
                 with open(self.pathName,'a') as writer:
                     writer.write(userinfo + "\n")
             else:
-                self.warning_message("Trùng id rồi kìa!\n Những id đã bị chiếm: " + str(userinfo))
-                return 1
+                return 1                
         else: #1:File khong ton tai    
             with open(self.pathName,'w') as writer:
                 writer.write(userinfo + "\n")

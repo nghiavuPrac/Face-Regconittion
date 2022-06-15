@@ -17,6 +17,7 @@ import os
 from PIL import Image
 import numpy as np
 import cv2
+from sympy import true
   
 
 
@@ -112,11 +113,13 @@ class Ui_fourthWindow(object):
                 checkId.append(info[0])
                 checkName.append(info[1].lower())
         if(id in checkId and name.lower() in checkName):
-            return 3
+            self.warning_message("Tai khoan da duoc dang ky!\n Nhan nut 'Remove user' va quay lai de cap nhat tai khoan")
+            return False
         elif(id in checkId):
-            return 2
+            self.warning_message("Trùng id rồi kìa!\n Những id đã bị chiếm: " + str(checkId))
+            return False
         else:
-            return 1
+            return True
     
     def write_imgPathToFile(self, imgPath):
         with open(self.listNameOfImage_path,'w') as writer:
@@ -144,17 +147,12 @@ class Ui_fourthWindow(object):
         if(os.path.exists(self.listOfUser_path)):
             #remove false user id
             self.remove_unused()
-            check = self.check_valid(id,name)
-            if(check == 3):
-                self.warning_message("Tai khoan da duoc dang ky!\n Nhan nut 'Remove user' va quay lai de cap nhat tai khoan")
-                return 1     
-            elif(check == 2):
-                self.warning_message("Trùng id rồi kìa!\n Những id đã bị chiếm: " + str(userinfo))
-                return 1
-            else:
+            if(self.check_valid(id,name)):
                 with open(self.listOfUser_path,'a') as writer:
                     writer.write(userinfo + "\n")
-                self.write_imgPathToFile(images)                
+                self.write_imgPathToFile(images)
+            else:
+                return 1                
 
         else: #1:File khong ton tai    
             with open(self.listOfUser_path,'w') as writer:
