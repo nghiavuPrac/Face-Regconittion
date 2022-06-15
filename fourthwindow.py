@@ -113,7 +113,7 @@ class Ui_fourthWindow(object):
                 checkId.append(info[0])
                 checkName.append(info[1].lower())
         if(id in checkId and name.lower() in checkName):
-            self.warning_message("Tai khoan da duoc dang ky!\n Nhan nut 'Remove user' va quay lai de cap nhat tai khoan")
+            self.warning_message("Tài khoản chưa được đăng ký!\n Nhấn nút 'Remove user' và quay lại để cập nhật tài khoản")
             return False
         elif(id in checkId):
             self.warning_message("Trùng id rồi kìa!\n Những id đã bị chiếm: " + str(checkId))
@@ -136,12 +136,12 @@ class Ui_fourthWindow(object):
         userinfo = id +","+name
         #3:Chua co ten
         if(len(name)==0):
-            self.warning_message("chua nhap ten kia!")
+            self.warning_message("Chưa nhập tên kìa!")
             return 1
         
         #4:Chua chon hinh
         if(len(images)==0):
-            self.warning_message("chua chon hinh kia!")
+            self.warning_message("Chưa chọn hình kìa!")
             return 1
         
         if(os.path.exists(self.listOfUser_path)):

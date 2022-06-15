@@ -54,9 +54,9 @@ class Ui_removeWindow(object):
                 for i in range(30):
                     pictureName =os.getcwd()+"\\Face-Regconittion\\FacialRecognition\\dataset\\User." + str(item[0]) +"."+ str(i+1) +".jpg"
                     os.remove(pictureName)
-                self.infrom_message(str(i+1)+" samples of ['"+str(item) + "'] was removed!")
+                self.infrom_message(str(i)+" samples of ['"+str(item) + "'] was removed!")
             except:
-                self.infrom_message(str(i+1)+" samples of ['"+str(item) + "'] was removed!")
+                self.infrom_message(str(i)+" samples of ['"+str(item) + "'] was removed!")
 
 
     def infrom_message(self,message):

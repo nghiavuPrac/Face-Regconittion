@@ -45,9 +45,10 @@ list_Pic = load_ChoosedPic(listNameOfImage_path)
 
 # Initialize individual sampling face count
 count = 0
-
+i=0
 while(True):
-    pic_name = list_Pic[count]
+    pic_name = list_Pic[i]
+    print(str(i)+","+list_Pic[i])
     img = cv2.imread(pic_name,cv2.IMREAD_COLOR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -69,10 +70,13 @@ while(True):
         cv2.imshow('image', img)
 
     k = cv2.waitKey(100) & 0xff # Press 'ESC' for exiting video
+    i += 1
     print(count)
     if k == 27:
         break
-    elif count >= len(list_Pic): # Take 30 face sample and stop video
+    if i == len(list_Pic):
+        break
+    if count >= 30: # Take 30 face sample and stop video
         break
 
 # Do a bit of cleanup
