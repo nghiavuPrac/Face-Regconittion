@@ -56,7 +56,7 @@ class Ui_fourthWindow(object):
         self.listWidget.addItem(item)
     
     def get_Image(self):
-        fname = QtWidgets.QFileDialog.getOpenFileNames(self.listWidget, 'Open file',self.setPath,"All Files (*);;Jpg Files (*.jpg);; PNG Files (*.png)")
+        fname = QtWidgets.QFileDialog.getOpenFileNames(self.listWidget, 'Open file',self.setPath,"Jpg Files (*.jpg);; PNG Files (*.png)")
         self.images.extend(fname[0])
         self.load_ImageToListwidget()
     
